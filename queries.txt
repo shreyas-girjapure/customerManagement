@@ -1,0 +1,55 @@
+create database customerManagementDB;
+
+use  customerManagementDB;
+
+create table users(
+userId int not null primary key,
+firstName varchar(255) not null,
+lastName varchar(255) not null,
+phoneNo varchar(255),
+addressOne varchar(255),
+addressTwo varchar(255),
+email varchar(255),
+isActive BOOLEAN default 0
+);
+
+create table products(
+productId int not null primary key,
+name varchar(255) not null,
+amount double,
+description varchar(255),
+isActive boolean
+);
+
+create table orders(
+orderId integer not null primary key,
+user_Id int,
+product_Id int,
+foreign key(user_Id) references users(userId),
+foreign key(product_Id) references products(productId)
+);
+
+ALTER TABLE users
+MODIFY COLUMN isActive boolean default 0;
+
+ALTER TABLE products
+MODIFY COLUMN isActive boolean default 0;
+
+
+ALTER TABLE users
+MODIFY COLUMN userId integer  not null auto_increment ;
+
+ALTER TABLE products
+MODIFY COLUMN productId integer not null auto_increment;
+
+ALTER TABLE orders
+MODIFY COLUMN orderId integer not null auto_increment;
+
+insert into users(userId,firstName,lastName) values(1000,'shreyas','girjapure');
+insert into products(productId,name,amount,description) values(10,'Prod1',1200.00,'this is a test product only meant to testi things');
+insert into products(name,amount,description) values('Prod2',1300.00,'this is test');
+
+
+insert into orders(orderId,user_Id,product_Id) values(100,1000,10);
+insert into orders(user_Id,product_Id) values(1000,11);
+
